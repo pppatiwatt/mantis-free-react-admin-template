@@ -1,7 +1,9 @@
+// นำเข้า Map.jsx ของคุณ
+import Map from 'src/pages/dashboard/Map.jsx';
+
 // material-ui
 import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -10,25 +12,20 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 
 // project import
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import MonthlyBarChart from './MonthlyBarChart';
-import ReportAreaChart from './ReportAreaChart';
-import UniqueVisitorCard from './UniqueVisitorCard';
-import SaleReportCard from './SaleReportCard';
 import OrdersTable from './OrdersTable';
+import ReportAreaChart from './ReportAreaChart';
+import SaleReportCard from './SaleReportCard';
+import UniqueVisitorCard from './UniqueVisitorCard';
 
 // assets
 import GiftOutlined from '@ant-design/icons/GiftOutlined';
 import MessageOutlined from '@ant-design/icons/MessageOutlined';
 import SettingOutlined from '@ant-design/icons/SettingOutlined';
-import avatar1 from 'assets/images/users/avatar-1.png';
-import avatar2 from 'assets/images/users/avatar-2.png';
-import avatar3 from 'assets/images/users/avatar-3.png';
-import avatar4 from 'assets/images/users/avatar-4.png';
 
 // avatar style
 const avatarSX = {
@@ -52,7 +49,17 @@ const actionSX = {
 export default function DashboardDefault() {
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-      {/* row 1 */}
+      {/* row 1 - แสดงแผนที่ที่ด้านบนสุด */}
+      <Grid item xs={12} sx={{ mb: -2.25 }}>
+        <Typography variant="h5">Map</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <MainCard>
+          <Map />
+        </MainCard>
+      </Grid>
+
+      {/* row 2 */}
       <Grid item xs={12} sx={{ mb: -2.25 }}>
         <Typography variant="h5">Dashboard</Typography>
       </Grid>
@@ -71,7 +78,7 @@ export default function DashboardDefault() {
 
       <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
 
-      {/* row 2 */}
+      {/* row 3 */}
       <Grid item xs={12} md={7} lg={8}>
         <UniqueVisitorCard />
       </Grid>
@@ -95,7 +102,7 @@ export default function DashboardDefault() {
         </MainCard>
       </Grid>
 
-      {/* row 3 */}
+      {/* row 4 */}
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
@@ -133,7 +140,7 @@ export default function DashboardDefault() {
         </MainCard>
       </Grid>
 
-      {/* row 4 */}
+      {/* row 5 */}
       <Grid item xs={12} md={7} lg={8}>
         <SaleReportCard />
       </Grid>
@@ -215,29 +222,17 @@ export default function DashboardDefault() {
         </MainCard>
         <MainCard sx={{ mt: 2 }}>
           <Stack spacing={3}>
-            <Grid container justifyContent="space-between" alignItems="center">
-              <Grid item>
-                <Stack>
-                  <Typography variant="h5" noWrap>
-                    Help & Support Chat
-                  </Typography>
-                  <Typography variant="caption" color="secondary" noWrap>
-                    Typical replay within 5 min
-                  </Typography>
-                </Stack>
+            <Grid container>
+              <Grid item xs={6}>
+                <Typography variant="h3">$10,200</Typography>
               </Grid>
-              <Grid item>
-                <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}>
-                  <Avatar alt="Remy Sharp" src={avatar1} />
-                  <Avatar alt="Travis Howard" src={avatar2} />
-                  <Avatar alt="Cindy Baker" src={avatar3} />
-                  <Avatar alt="Agnes Walker" src={avatar4} />
-                </AvatarGroup>
+              <Grid item xs={6}>
+                <Typography variant="body1" sx={{ color: 'success.main' }}>
+                  +2.6%
+                </Typography>
               </Grid>
             </Grid>
-            <Button size="small" variant="contained" sx={{ textTransform: 'capitalize' }}>
-              Need Help?
-            </Button>
+            <MonthlyBarChart />
           </Stack>
         </MainCard>
       </Grid>

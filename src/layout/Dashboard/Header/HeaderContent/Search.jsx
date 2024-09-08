@@ -1,8 +1,8 @@
 // material-ui
+import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Box from '@mui/material/Box';
 
 // assets
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
@@ -25,7 +25,7 @@ export default function Search() {
           inputProps={{
             'aria-label': 'weight'
           }}
-          placeholder="Ctrl + K"
+          placeholder="ค้นหารายชื่อสถานี..."
         />
       </FormControl>
     </Box>
