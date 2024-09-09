@@ -12,9 +12,11 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState('');
   const [northernRainStations, setNorthernRainStations] = useState([]);
   const [filteredStations, setFilteredStations] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(-1); // State สำหรับเก็บดัชนีของสถานีที่เลือก
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [isFocused, setIsFocused] = useState(false);
 
   const inputRef = useRef(null);
+  const listItemRefs = useRef([]);
 
   useEffect(() => {
     // Load data from JSON file
@@ -36,26 +38,38 @@ export default function Search() {
 
   const handleBlur = (event) => {
     if (inputRef.current && !inputRef.current.contains(event.target)) {
-      setFilteredStations([]);
+      setIsFocused(false);
     }
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
   };
 
   const handleStationClick = (stationName) => {
     setSearchTerm(stationName);
-    setTimeout(() => {
-      setFilteredStations([]);
-    }, 100); // หน่วงเวลา 100ms เพื่อซ่อนรายการสถานี
+    setFilteredStations([]);
+    setIsFocused(false);
   };
 
   const handleKeyDown = (event) => {
     if (event.key === 'ArrowDown') {
-      // เลื่อนลงในลิสต์
-      setSelectedIndex((prevIndex) => (prevIndex < filteredStations.length - 1 ? prevIndex + 1 : prevIndex));
+      setSelectedIndex((prevIndex) => {
+        const newIndex = prevIndex < filteredStations.length - 1 ? prevIndex + 1 : prevIndex;
+        if (listItemRefs.current[newIndex]) {
+          listItemRefs.current[newIndex].scrollIntoView({ block: 'nearest' });
+        }
+        return newIndex;
+      });
     } else if (event.key === 'ArrowUp') {
-      // เลื่อนขึ้นในลิสต์
-      setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+      setSelectedIndex((prevIndex) => {
+        const newIndex = prevIndex > 0 ? prevIndex - 1 : prevIndex;
+        if (listItemRefs.current[newIndex]) {
+          listItemRefs.current[newIndex].scrollIntoView({ block: 'nearest' });
+        }
+        return newIndex;
+      });
     } else if (event.key === 'Enter' && selectedIndex >= 0) {
-      // กด Enter เพื่อเลือกสถานีที่กำลังไฮไลท์
       handleStationClick(filteredStations[selectedIndex].name);
     }
   };
@@ -68,8 +82,9 @@ export default function Search() {
           size="small"
           id="header-search"
           value={searchTerm}
+          onFocus={handleFocus}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleKeyDown} // จับ event เมื่อกดปุ่ม
+          onKeyDown={handleKeyDown}
           startAdornment={
             <InputAdornment position="start" sx={{ mr: -0.5 }}>
               <SearchOutlined />
@@ -82,7 +97,7 @@ export default function Search() {
           placeholder="ค้นหารายชื่อสถานี..."
         />
       </FormControl>
-      {searchTerm && filteredStations.length > 0 && (
+      {isFocused && searchTerm && filteredStations.length > 0 && (
         <Box
           sx={{
             mt: 1,
@@ -102,8 +117,20 @@ export default function Search() {
               <ListItem
                 button
                 key={station.id}
-                selected={index === selectedIndex} // เพิ่มการไฮไลท์เมื่อเลือก
+                ref={(el) => (listItemRefs.current[index] = el)}
+                selected={index === selectedIndex}
                 onClick={() => handleStationClick(station.name)}
+                sx={{
+                  '&:hover': {
+                    backgroundColor: 'rgba(128, 128, 128, 0.1)'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: 'rgba(128, 128, 128, 0.1)'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: 'rgba(128, 128, 128, 0.15)'
+                  }
+                }}
               >
                 <ListItemText primary={station.name} />
               </ListItem>
