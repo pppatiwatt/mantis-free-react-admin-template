@@ -54,9 +54,9 @@ export default function DashboardDefault() {
         <Typography variant="h5">Map</Typography>
       </Grid>
       <Grid item xs={12}>
-        <MainCard>
-          <Map />
-        </MainCard>
+        {/* <MainCard> */}
+        <Map />
+        {/* </MainCard> */}
       </Grid>
 
       {/* row 2 */}
