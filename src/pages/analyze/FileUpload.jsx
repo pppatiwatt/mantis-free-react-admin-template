@@ -2,7 +2,8 @@ import UploadOutlined from '@ant-design/icons/UploadOutlined';
 import { Alert, Box, Button, Typography } from '@mui/material';
 import { useState } from 'react';
 
-const FileUpload = () => {
+// ==============================|| FILE UPLOAD COMPONENT ||============================== //
+export default function FileUpload() {
   const [files, setFiles] = useState({
     humidity: null,
     rainfall: null,
@@ -74,6 +75,4 @@ const FileUpload = () => {
       {error && <Alert severity="error">{error}</Alert>}
     </Box>
   );
-};
-
-export default FileUpload;
+}

@@ -1,7 +1,8 @@
 import { Grid, Paper, Typography } from '@mui/material';
 import FileUpload from './FileUpload';
+import SalesChart from './SalesChart';
 
-// Placeholder components
+// Placeholder component (ไม่เปลี่ยนแปลง)
 const PlaceholderComponent = ({ title }) => (
   <Paper
     sx={{
@@ -18,41 +19,27 @@ const PlaceholderComponent = ({ title }) => (
   </Paper>
 );
 
-const AnalyzePage = () => {
+// ==============================|| ANALYZE PAGE ||============================== //
+export default function AnalyzePage() {
   return (
-    <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+    <Grid container spacing={3}>
       {/* row 1 - File Upload */}
-      <Grid item xs={12} sx={{ mb: -2.25 }}>
-        <Typography variant="h5">File Upload</Typography>
-      </Grid>
       <Grid item xs={12}>
+        <Typography variant="h5" gutterBottom>
+          File Upload
+        </Typography>
         <Paper sx={{ p: 2, border: '1px solid #e0e0e0', boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)' }}>
           <FileUpload />
         </Paper>
       </Grid>
-      {/* row 2 - Data Summary */}
-      {/* <Grid item xs={12} sx={{ mb: -2.25 }}>
-        <Typography variant="h5">Data Summary</Typography>
+
+      {/* row 2 - Sales Chart */}
+      <Grid item xs={12} md={8}>
+        <Typography variant="h5" gutterBottom>
+          Random Forest SPI
+        </Typography>
+        <SalesChart />
       </Grid>
-      <Grid item xs={12}>
-        <DataSummary />
-      </Grid> */}
-      {/* row 3 - Trend Analysis and Predictive Model */}
-      {/* <Grid item xs={12} md={6}>
-        <PlaceholderComponent title="Trend Analysis" />
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <PlaceholderComponent title="Predictive Model" />
-      </Grid> */}
-      {/* row 4 - Analytics Chart */}
-      {/* <Grid item xs={12}>
-        <Typography variant="h5">Analytics Chart</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <PlaceholderComponent title="Analytics Chart" />
-      </Grid> */}
     </Grid>
   );
-};
-
-export default AnalyzePage;
+}

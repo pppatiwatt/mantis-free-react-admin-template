@@ -5,7 +5,8 @@ import locationIcon from 'src/assets/images/icons/location.svg';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoicGF0aXdhdC1qdW1zaWwwNSIsImEiOiJjbTBpMmkzaXEwaTZ1MmtvbTFseTZucnFyIn0.1Ca7HKT3rotKyqN171kL3A';
 
-const MapboxComponent = () => {
+// ==============================|| MAPBOX COMPONENT ||============================== //
+export default function MapboxComponent() {
   const [viewState, setViewState] = useState({
     latitude: 17.9883,
     longitude: 98.9817,
@@ -48,6 +49,4 @@ const MapboxComponent = () => {
       </Map>
     </div>
   );
-};
-
-export default MapboxComponent;
+}
